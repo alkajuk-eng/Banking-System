@@ -1,25 +1,26 @@
+
 // BankAccount class
 class bankAccount {
   // Constructor creates a new bank account
-  constructor(accountNumber, accountHolder, balance = 0) {
-    this.accountNumber = accountNumber;
+  constructor(accountHolder,birthDay, accountNumber, sortCode, balance = 0) {
     this.accountHolder = accountHolder;
+    this.birthDay = birthDay;
+    this.accountNumber = accountNumber;
+    this.sortCode = sortCode;
     this.balance = balance;
   }
 
   // Deposit method adds money to the account
   deposit(amount) {
     // Check that the deposit amount is not negative
-    if (amount < 0) {
+    if (amount <= 0) {
       console.log("Deposit amount must be greater than £0.");
       return;
     } else {
       // Add the deposit amount to the current balance
       this.balance += amount;
 
-      console.log(
-        `You deposited £${amount}. Your current account balance is £${this.balance}.`
-      );
+      console.log(`You deposited £${amount}. Your current account balance is £${this.balance}.`);
     }
   }
 
@@ -27,21 +28,18 @@ class bankAccount {
   withdraw(amount) {
     // Check if there is enough money in the account
     if (amount > this.balance) {
-      console.log("Insufficient funds.");
+      console.log('Insufficient funds. Your balance is £{this.balance}.');
       return;
     } else {
       // Subtract the withdrawal amount from the current balance
       this.balance -= amount;
-
-      console.log(
-        `You withdrew £${amount}. Your current account balance is £${this.balance}.`
-      );
+      console.log(`You withdrew £${amount}. Your current account balance is £${this.balance}.`);
     }
   }
 
   // Check balance method displays the current account balance
   checkBalance() {
-    console.log(`Your current account balance is £${this.balance}`);
+    console.log(`Your current account balance is £${this.balance}.`);
   }
 }
 

@@ -1,13 +1,60 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Banking system</title>
-  </head>
 
-  <body>
-    <!-- Connect the JavaScript module -->
-    <script type="module" src="index.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Banking system</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+  <form id="accountForm" onclick="createAccount(event)">
+
+  <!-- Input for the account holder's full name -->
+  <label for="accountHolder">Account Holder</label>
+  <input
+    type="text"
+    id="accountHolder"
+    name="accountHolder"
+    placeholder="Type account Full Name..."
+    required
+  />
+
+  <!-- Input for selecting the account holder's date of birth -->
+  <label for="birthDay">Date of Birth</label>
+  <input
+    type="date"
+    id="birthDay"
+    name="birthDay"
+    required
+  />
+
+  <!-- Input for entering the initial deposit amount -->
+  <label for="initialDepositAmount">Initial Deposit Amount</label>
+  <input
+    type="number"
+    id="initialDepositAmount"
+    name="initialDepositAmount"
+    placeholder="Type initial deposit amount..."
+    required
+  />
+
+  <!-- Button for submitting the form and creating the account -->
+  <button type="submit">Create Account</button>
+
+</form>
+
+
+
+
+
+
+  <!-- Connect the JavaScript module -->
+  <script type="module" src="index.js"></script>
+
+
+</body>
+
 </html>
