@@ -11,6 +11,7 @@ function setBirthDateLimits(birthDay) {
   // This means the person must be at least 10 years old
   maxDate.setFullYear(today.getFullYear() - 10);
 
+  
   // Create another copy of today's date
   const minDate = new Date(today);
 
@@ -21,7 +22,7 @@ function setBirthDateLimits(birthDay) {
   // Convert the maximum date to YYYY-MM-DD format
   // and set it as the maximum allowed date
   birthDay.max = maxDate.toISOString().split("T")[0];
-
+   
   // Convert the minimum date to YYYY-MM-DD format
   // and set it as the minimum allowed date
   birthDay.min = minDate.toISOString().split("T")[0];
