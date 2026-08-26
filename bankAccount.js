@@ -1,8 +1,7 @@
-
 // BankAccount class
 class bankAccount {
   // Constructor creates a new bank account
-  constructor(accountHolder,birthDay, accountNumber, sortCode, balance = 0) {
+  constructor(accountHolder, birthDay, accountNumber, sortCode, balance = 0) {
     this.accountHolder = accountHolder;
     this.birthDay = birthDay;
     this.accountNumber = accountNumber;
@@ -14,27 +13,30 @@ class bankAccount {
   deposit(amount) {
     // Check that the deposit amount is not negative
     if (amount <= 0) {
-      console.log("Deposit amount must be greater than £0.");
-      return;
+      alert("Deposit amount must be greater than £0.");
+      return false;
     } else {
       // Add the deposit amount to the current balance
       this.balance += amount;
-
-      console.log(`You deposited £${amount}. Your current account balance is £${this.balance}.`);
+      return true;
     }
   }
 
   // Withdrawal method removes money from the account
   withdraw(amount) {
+    // Check that the withdrawal amount is greater than £0
+    if (amount <= 0) {
+      alert("Withdrawal amount must be greater than £0.");
+      return false;
+    }
     // Check if there is enough money in the account
     if (amount > this.balance) {
-      console.log('Insufficient funds. Your balance is £{this.balance}.');
-      return;
-    } else {
-      // Subtract the withdrawal amount from the current balance
-      this.balance -= amount;
-      console.log(`You withdrew £${amount}. Your current account balance is £${this.balance}.`);
+      alert(`Insufficient funds. Your balance is £${this.balance}.`);
+      return false;
     }
+    // Subtract the withdrawal amount from the current balance
+    this.balance -= amount;
+    return true;
   }
 
   // Check balance method displays the current account balance

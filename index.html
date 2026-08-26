@@ -79,51 +79,9 @@
   <!-- ACCOUNT DISPLAY -->
  
   <section id="accountDisplay" class="account-display">
-
       <h2>Account Details</h2>
-
-      <div class="account-details">
-        <label >Full Name:</label>
-        <label >Date of Birth</label>
-        <label >Account Number:</label>
-        <label >Sort Code:</label>
-        <label >Balance:</label>
-      </div>
-
-      <div class="account-information"></div>
-
-  </section>
-
-
-
-    <!-- OPERATION -->
-    <div>
-      <div class="account-field">
-        <label for="operation">Operation</label>
-        <select id="operation" class="account-select">
-          <option value="">Select Operation</option>
-          <option value="deposit">Deposit</option>
-          <option value="withdraw">Withdraw</option>
-          <option value="checkBalance">Check Balance</option>
-        </select>
-      </div>
-
-      <!-- OPERATION AMOUNT -->
-    
-      <div id="operationAmountContainer" class="account-field" hidden>
-        <label for="operationAmount">Amount</label>
-        <input type="number" id="operationAmount" class="account-input" placeholder="Enter amount..." min="0" />
-      </div>
-
-      <!-- ACTION BUTTONS -->
-      
-      <div class="account-actions">
-        <button type="button" id="actionButton">Action</button>
-        <button type="button" id="removeAccountButton">Close Account</button>
-      </div>
-    </div>
-
-  
+      <div id="accountInformation" class="account-information"></div>
+  </section>  
 
   <!-- JAVASCRIPT -->
   <script type="module" src="index.js"></script>

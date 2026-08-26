@@ -45,26 +45,10 @@ const sortCode = document.getElementById("sortCode");
 /* ///////////////////////////////////////////////////////////////////////////*/
 
 // Get the main account display section
-const accountDisplay = document.getElementById("accountDisplay");
+/* const accountDisplay = document.getElementById("accountDisplay"); */
 
-const accountInformation = document.getElementById("account-information");
-/* ///////////////////////////////////////////////////////////////////////////*/
+const accountInformation = document.getElementById("accountInformation");
 
-
-
-
-/* const operation = document.getElementById("operation");
-
-const operationAmountContainer = document.getElementById(
-  "operationAmountContainer"
-);
-
-const operationAmount = document.getElementById("operationAmount");
-
-const actionButton = document.getElementById("actionButton");
-const removeAccountButton = document.getElementById(
-  "removeAccountButton"
-); */
 
 /* /////////////////////////////////////////////////////// */
 
@@ -140,19 +124,148 @@ function resetFullName() {
 
   const result = accountArray.filter(item => item.accountHolder === fullName.value);
 
+  /* ////////////////////////////////////////////////////// */
 
   accountInformation.innerHTML = "";
 
   result.forEach(item => {
     
+    const holderDiv=document.createElement("div");
+    const holderLabel=document.createElement("label");
+    holderLabel.textContent="Full Name:";
+    const holderSpan= document.createElement("span");
+    holderSpan.textContent=item.accountHolder;
+    holderDiv.appendChild(holderLabel);
+    holderDiv.appendChild(holderSpan);
+    accountInformation.appendChild(holderDiv);
+
+    const dobDiv=document.createElement("div");
+    const dobLabel=document.createElement("label");
+    dobLabel.textContent="Date of Birth:";
+    const dobSpan= document.createElement("span");
+    dobSpan.textContent=item.birthDay;
+    dobDiv.appendChild(dobLabel);
+    dobDiv.appendChild(dobSpan);
+    accountInformation.appendChild(dobDiv);
+
+    const accountDiv=document.createElement("div");
+    const accountLabel=document.createElement("label");
+    accountLabel.textContent="Account Number:";
+    const accountSpan= document.createElement("span");
+    accountSpan.textContent=item.accountNumber;
+    accountDiv.appendChild(accountLabel);
+    accountDiv.appendChild(accountSpan);
+    accountInformation.appendChild(accountDiv);
+
+    const sortDiv=document.createElement("div");
+    const sortLabel=document.createElement("label");
+    sortLabel.textContent="Sort Code:";
+    const sortSpan= document.createElement("span");
+    sortSpan.textContent=item.sortCode;
+    sortDiv.appendChild(sortLabel);
+    sortDiv.appendChild(sortSpan);
+    accountInformation.appendChild(sortDiv);
+
+
+    const balanceDiv=document.createElement("div");
+    const balanceLabel=document.createElement("label");
+    balanceLabel.textContent="Balance:";
+    const balanceSpan= document.createElement("span");
+    balanceSpan.textContent="";
+    balanceDiv.appendChild(balanceLabel);
+    balanceDiv.appendChild(balanceSpan);
+    accountInformation.appendChild(balanceDiv);
     
+    const operationDiv = document.createElement("div");
+    const operationLabel=document.createElement("label");
+    operationLabel.textContent="Operation";
+    const operationSelect = document.createElement("select");
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "Select Operation";
+    defaultOption.disabled = true;
+    defaultOption.selected = true;  
+    const depositOption = document.createElement("option");
+    depositOption.value = "deposit";
+    depositOption.textContent = "Deposit";
+    const withdrawOption = document.createElement("option");
+    withdrawOption.value = "withdraw";
+    withdrawOption.textContent = "Withdraw";
+    const checkBalanceOption = document.createElement("option");
+    checkBalanceOption.value = "checkBalance";
+    checkBalanceOption.textContent = "Check Balance";
+    operationSelect.appendChild(defaultOption);
+    operationSelect.appendChild(depositOption);
+    operationSelect.appendChild(withdrawOption);
+    operationSelect.appendChild(checkBalanceOption);
+    operationDiv.appendChild(operationLabel);
+    operationDiv.appendChild(operationSelect);
+    accountInformation.appendChild(operationDiv);
 
-    const holderLabel= document.createElement("label");
-    holderLabel.textContent="Full Name";
+    const operationAmountDiv=document.createElement("div");
+    const operationAmountLabel=document.createElement("label");
+    operationAmountLabel.textContent="Operation Amount:";
+    const operationAmountInput = document.createElement("input");
+    operationAmountInput.classList.add("operation-amount");
+    operationAmountInput.type = "number";
+    operationAmountInput.classList.add("account-input");
+    operationAmountInput.placeholder = "Enter amount...";
+    operationAmountInput.min = "0";
+    operationAmountInput.disabled = true;
+    operationAmountDiv.appendChild(operationAmountLabel);
+    operationAmountDiv.appendChild(operationAmountInput);
+    accountInformation.appendChild(operationAmountDiv);
 
-    fullNameLabel.textContent=result.accountHolder;
+    operationSelect.addEventListener("change", () => {
+      operationAmountInput.value="";
+      if (
+        operationSelect.value === "deposit" || operationSelect.value === "withdraw"
+      ) {
+        operationAmountInput.disabled = false;
+      } else {
+        operationAmountInput.disabled = true;
+        operationAmountInput.value = "";
+      }
+    });
 
-    accountDisplay.appendChild
+    const actionButton = document.createElement("button");
+    actionButton.classList.add("action-button");
+    actionButton.type = "button";
+    actionButton.textContent = "Action";
+    accountInformation.appendChild(actionButton);
+
+    const removeButton = document.createElement("button");
+    removeButton.classList.add("remove-button");
+    removeButton.type = "button";
+    removeButton.textContent = "Remove";
+    accountInformation.appendChild(removeButton);
+
+/* //////////////////// */
+
+    actionButton.addEventListener("click", () => {
+
+        const amount = Number(operationAmountInput.value);
+
+          if (operationSelect.value === "deposit") {
+
+            const success = item.deposit(amount);
+            if (success) {
+              balanceSpan.textContent = `£${item.balance}`;
+            }
+            operationAmountInput.value="";
+          } 
+          else if (operationSelect.value === "withdraw") {
+            const success = item.withdraw(amount);
+            if (success) {
+              balanceSpan.textContent = `£${item.balance}`;
+            }
+            operationAmountInput.value="";
+          } 
+          else if (operationSelect.value === "checkBalance") {
+            item.checkBalance();
+            balanceSpan.textContent = `£${item.balance}`;
+          }
+        });
   });
 }
 
@@ -163,95 +276,40 @@ function resetFullName() {
 
 
 
-
-
-
-
-
-
 // Listen for changes in the Full Name select
-dob.addEventListener("change", resetExcludingDOB);
+dob.addEventListener("change", resetDOB);
 
 // Reset all other account selects to their default options
-function resetExcludingDOB() {
+function resetDOB() {
   fullName.selectedIndex = 0;
   accountNumber.selectedIndex = 0;
   sortCode.selectedIndex = 0;
 
-  const result = accountArray.filter(item => item.birthDay === dob.value);
-  // Clear previous displayed accounts
-  accountDisplay.innerHTML = "";
-
-  // Display all matching accounts
-  result.forEach(item => {
-
-    // Create a new element for the account
-    const accountInfo = document.createElement("div");
-
-    // Display account information
-    accountInfo.textContent =
-      `${item.accountHolder} | ${item.birthDay} | ${item.accountNumber} | ${item.sortCode} | £${item.balance}`;
-
-    // Add the account to the display section
-    accountDisplay.appendChild(accountInfo);
-  });
+  
+  
 }
 
 // Listen for changes in the Full Name select
-accountNumber.addEventListener("change", resetExcludingaccountNumber);
+accountNumber.addEventListener("change", resetAccount);
 
 // Reset all other account selects to their default options
-function resetExcludingaccountNumber() {
+function resetAccount() {
   fullName.selectedIndex = 0;
   dob.selectedIndex = 0;
   sortCode.selectedIndex = 0;
-
-  const result = accountArray.filter(item => item.accountNumber === accountNumber.value);
-  // Clear previous displayed accounts
-  accountDisplay.innerHTML = "";
-
-  // Display all matching accounts
-  result.forEach(item => {
-
-    // Create a new element for the account
-    const accountInfo = document.createElement("div");
-
-    // Display account information
-    accountInfo.textContent =
-      `${item.accountHolder} | ${item.birthDay} | ${item.accountNumber} | ${item.sortCode} | £${item.balance}`;
-
-    // Add the account to the display section
-    accountDisplay.appendChild(accountInfo);
-  });
 }
 
 // Listen for changes in the Full Name select
-sortCode.addEventListener("change", resetExcludingsortCode);
+sortCode.addEventListener("change", resetSortCode);
 
 // Reset all other account selects to their default options
-function resetExcludingsortCode() {
+function resetSortCode() {
   fullName.selectedIndex = 0;
   dob.selectedIndex = 0;
   accountNumber.selectedIndex = 0;
 
-  const result = accountArray.filter(item => item.sortCode === sortCode.value);
-  // Clear previous displayed accounts
-  accountDisplay.innerHTML = "";
-
-  // Display all matching accounts
-  result.forEach(item => {
-
-    // Create a new element for the account
-    const accountInfo = document.createElement("div");
-
-    // Display account information
-    accountInfo.textContent =
-      `${item.accountHolder} | ${item.birthDay} | ${item.accountNumber} | ${item.sortCode} | £${item.balance}`;
-
-    // Add the account to the display section
-    accountDisplay.appendChild(accountInfo);
-  });
+  
 }
 
-/* /////////////////////////////////////////////////////// */
+
 
