@@ -8,8 +8,10 @@ import newAccountNumber from "./newAccountNumber.js";
 import newSortCode from "./newSortCode.js";
 // Import the function for displaying account information
 import displayAccountInformation from "./accountDisplay.js";
-// Import the function for updating account select elements
-import updateAccountSelects from "./updateAccountSelects.js";
+// Import the function for refreshing the account select elements
+import refreshSelection from "./refreshSelection.js";
+
+import deleteAccount from "./deleteAccount.js";
 
 // Get the account form from the HTML
 const accountForm = document.getElementById("accountForm");
@@ -25,7 +27,6 @@ const initialDepositAmount = document.getElementById("initialDepositAmount");
 // Listen for the form submit event
 accountForm.addEventListener("submit", createAccount);
 
-
 // Get the Full Name select element
 const fullName = document.getElementById("fullName");
 // Get the Date of Birth select element
@@ -37,7 +38,6 @@ const sortCode = document.getElementById("sortCode");
 
 // Get the main account display section
 const accountInformation = document.getElementById("accountInformation");
-
 
 // Store all created bank account objects
 let accountArray = [];
@@ -67,69 +67,112 @@ function createAccount(event) {
     Number(initialDepositAmount),
   );
 
-  // Update the account select elements
-  updateAccountSelects(accountArray,account,fullName,dob,accountNumber,sortCode);
-
   // Add the new account object to the account array
   accountArray.push(account);
+
+  refreshSelection(accountArray, fullName, dob, accountNumber, sortCode)
 
   // Reset the form fields
   accountForm.reset();
 }
 
 // Handle changes to the Full Name select
-  fullName.addEventListener("change", () => {
-    // Reset the other select elements
-    dob.selectedIndex = 0;
-    accountNumber.selectedIndex = 0;
-    sortCode.selectedIndex = 0;
-    // Find accounts matching the selected account holder
-    const result = accountArray.filter(item => item.accountHolder === fullName.value);
-    // Display the matching account information
-    displayAccountInformation(result, accountInformation);
-  });
+fullName.addEventListener("change", () => {
+  // Reset the other select elements
+  dob.selectedIndex = 0;
+  accountNumber.selectedIndex = 0;
+  sortCode.selectedIndex = 0;
+  // Find accounts matching the selected account holder
+  const result = accountArray.filter(item => item.accountHolder === fullName.value);
+  // Display the matching account information
+  displayAccountInformation(
+    result,
+    accountInformation,
+    deleteAccount,
+    accountArray,
+    fullName,
+    dob,
+    accountNumber,
+    sortCode,
+    refreshSelection
+  );
+});
 
-  // Handle changes to the Date of Birth select
-  dob.addEventListener("change", () => {
-    // Reset the other select elements
-    fullName.selectedIndex = 0;
-    accountNumber.selectedIndex = 0;
-    sortCode.selectedIndex = 0;
-    // Find accounts matching the selected date of birth
-    const result = accountArray.filter(
-      item => item.birthDay === dob.value
-    );
-    // Display the matching account information
-    displayAccountInformation(result, accountInformation);
-  });
+// Handle changes to the Date of Birth select
+dob.addEventListener("change", () => {
+  // Reset the other select elements
+  fullName.selectedIndex = 0;
+  accountNumber.selectedIndex = 0;
+  sortCode.selectedIndex = 0;
+  // Find accounts matching the selected date of birth
+  const result = accountArray.filter(
+    item => item.birthDay === dob.value
+  );
+  // Display the matching account information
+  displayAccountInformation(
+    result,
+    accountInformation,
+    deleteAccount,
+    accountArray,
+    fullName,
+    dob,
+    accountNumber,
+    sortCode,
+    refreshSelection
+  );
+});
 
-  // Handle changes to the Account Number select
-  accountNumber.addEventListener("change", () => {
-    // Reset the other select elements
-    fullName.selectedIndex = 0;
-    dob.selectedIndex = 0;
-    sortCode.selectedIndex = 0;
-    // Find the account matching the selected account number
-    // Convert the account number to a string for comparison
-    const result = accountArray.filter(
-      item => String(item.accountNumber) === accountNumber.value
-    );
-    // Display the matching account information
-    displayAccountInformation(result, accountInformation);
-  });
+// Handle changes to the Account Number select
+accountNumber.addEventListener("change", () => {
+  // Reset the other select elements
+  fullName.selectedIndex = 0;
+  dob.selectedIndex = 0;
+  sortCode.selectedIndex = 0;
+  // Find the account matching the selected account number
+  // Convert the account number to a string for comparison
+  const result = accountArray.filter(
+    item => String(item.accountNumber) === accountNumber.value
+  );
+  // Display the matching account information
+  displayAccountInformation(
+    result,
+    accountInformation,
+    deleteAccount,
+    accountArray,
+    fullName,
+    dob,
+    accountNumber,
+    sortCode,
+    refreshSelection
+  );
+});
 
-  // Handle changes to the Sort Code select
-  sortCode.addEventListener("change", () => {
-    // Reset the other select elements
-    fullName.selectedIndex = 0;
-    dob.selectedIndex = 0;
-    accountNumber.selectedIndex = 0;
-    // Find the account matching the selected sort code
-    const result = accountArray.filter(
-      item => item.sortCode === sortCode.value
-    );
-    // Display the matching account information
-    displayAccountInformation(result, accountInformation);
-  });
+// Handle changes to the Sort Code select
+sortCode.addEventListener("change", () => {
+  // Reset the other select elements
+  fullName.selectedIndex = 0;
+  dob.selectedIndex = 0;
+  accountNumber.selectedIndex = 0;
+  // Find the account matching the selected sort code
+  const result = accountArray.filter(
+    item => item.sortCode === sortCode.value
+  );
+  // Display the matching account information
+  displayAccountInformation(
+    result,
+    accountInformation,
+    deleteAccount,
+    accountArray,
+    fullName,
+    dob,
+    accountNumber,
+    sortCode,
+    refreshSelection
+  );
+});
+
+
+
+
 
 
