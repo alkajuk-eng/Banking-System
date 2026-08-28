@@ -13,11 +13,11 @@ function refreshSelection(accountArray, fullName, dob, accountNumber, sortCode) 
   }
   // Add account holder names to the Full Name select
   nameArray.forEach(item => {
-    const Option = document.createElement("option");
-    Option.value = item;
-    Option.textContent = item;
-    fullName.appendChild(Option);
-  })
+    const option = document.createElement("option");
+    option.value = item;
+    option.textContent = item;
+    fullName.appendChild(option);
+  });
 
   // Keep only the default option
   dob.options.length = 1;
@@ -32,31 +32,31 @@ function refreshSelection(accountArray, fullName, dob, accountNumber, sortCode) 
 
   // Add dates of birth to the Date of Birth select
   dobArray.forEach(item => {
-    const Option = document.createElement("option");
-    Option.value = item;
-    Option.textContent = item;
-    dob.appendChild(Option);
-  })
+    const option = document.createElement("option");
+    option.value = item;
+    option.textContent = item;
+    dob.appendChild(option);
+  });
 
   // Keep only the default option
   accountNumber.options.length = 1;
   // Add account numbers to the Account Number select
   accountArray.forEach(item => {
-    const Option = document.createElement("option");
-    Option.value = item.accountNumber;
-    Option.textContent = item.accountNumber;
-    accountNumber.appendChild(Option);
-  })
+    const option = document.createElement("option");
+    option.value = item.accountNumber;
+    option.textContent = item.accountNumber;
+    accountNumber.appendChild(option);
+  });
 
   // Keep only the default option
   sortCode.options.length = 1;
   // Add sort codes to the Sort Code select
   accountArray.forEach(item => {
-    const Option = document.createElement("option");
-    Option.value = item.sortCode;
-    Option.textContent = item.sortCode;
-    sortCode.appendChild(Option);
-  })
+    const option = document.createElement("option");
+    option.value = item.sortCode;
+    option.textContent = item.sortCode;
+    sortCode.appendChild(option);
+  });
 }
 
 // Export the refreshSelection function

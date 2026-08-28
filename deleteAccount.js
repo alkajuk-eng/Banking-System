@@ -1,15 +1,12 @@
 // Delete a bank account
-function deleteAccount(item, accountArray, fullName, dob, accountNumber, sortCode, accountInformation, refreshSelection) {
+function deleteAccount(item, accountsArray, fullName, dob, accountNumber, sortCode, accountInformation, refreshSelection) {
  
   // Find the position of the selected account
-  const index = accountArray.indexOf(item);
-
+  const index = accountsArray.indexOf(item);
   // Remove the account from the array
-  accountArray.splice(index, 1);
-
+  accountsArray.splice(index, 1);
   // Refresh all account select elements
-  refreshSelection( accountArray, fullName, dob, accountNumber, sortCode);
-
+  refreshSelection( accountsArray, fullName, dob, accountNumber, sortCode);
   // Clear the account information display
   accountInformation.innerHTML = "";
 }

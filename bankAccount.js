@@ -1,5 +1,5 @@
 // BankAccount class
-class bankAccount {
+class BankAccount {
   // Constructor creates a new bank account
   constructor(accountHolder, birthDay, accountNumber, sortCode, balance = 0) {
     this.accountHolder = accountHolder;
@@ -46,4 +46,4 @@ class bankAccount {
 }
 
 // Export the BankAccount class as the default module
-export default bankAccount;
+export default BankAccount;

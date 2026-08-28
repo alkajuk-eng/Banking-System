@@ -2,12 +2,12 @@
 function displayAccountInformation(
   result,
   accountInformation,
-  deleteAccount,
-  accountArray,
+  accountsArray,
   fullName,
   dob,
   accountNumber,
   sortCode,
+  deleteAccount,
   refreshSelection
 ) {
 
@@ -179,7 +179,7 @@ function displayAccountInformation(
       // Delete the selected account
       deleteAccount(
         item,
-        accountArray,
+        accountsArray,
         fullName,
         dob,
         accountNumber,
