@@ -1,86 +1,181 @@
 # Banking System
 
-A simple JavaScript Banking System project created to practise **classes, constructors, methods, objects, and ES modules**.
+A simple banking system web application built with **HTML, CSS and JavaScript**.
 
-## About the Project
+The project demonstrates JavaScript **classes, modules, functions, arrays, DOM manipulation, event listeners and object-oriented programming**.
 
-This project simulates basic banking operations using a `BankAccount` class.
+## Features
 
-Each bank account contains:
+* Create a new bank account
+* Generate a unique 8-digit account number
+* Generate a unique 6-digit Sort Code
+* Set minimum and maximum date of birth
+* Store multiple bank accounts
+* Search accounts by:
 
-* Account number
-* Account holder name
-* Account balance
-
-The project allows you to:
-
-* Create new bank accounts
+  * Full Name
+  * Date of Birth
+  * Account Number
+  * Sort Code
+* Display account information
 * Deposit money
 * Withdraw money
-* Check the current balance
-* Display account information in the console
+* Check account balance
+* Delete a bank account
+* Automatically refresh account selection lists
 
-## Technologies Used
+## Technologies
 
 * HTML5
+* CSS3
 * JavaScript (ES6+)
-* ES Modules
+* JavaScript Modules
+* Object-Oriented Programming
+* DOM Manipulation
 
 ## Project Structure
 
 ```text
-Simple Banking System/
+Banking-System/
 │
 ├── index.html
+├── index.css
+│
 ├── index.js
 ├── bankAccount.js
-└── README.md
+├── birthDate.js
+├── newAccountNumber.js
+├── newSortCode.js
+├── refreshSelection.js
+├── accountDisplay.js
+└── deleteAccount.js
 ```
 
-## How It Works
+## JavaScript Modules
 
-The `bankAccount.js` file contains the `BankAccount` class with a constructor and three methods:
+### `bankAccount.js`
 
-### Constructor
+Contains the `BankAccount` class.
 
-Creates a new bank account with an account number, account holder, and starting balance.
+The class is responsible for:
 
-### `deposit()`
+* Creating bank account objects
+* Depositing money
+* Withdrawing money
+* Checking the account balance
 
-Adds money to the account balance.
+### `newAccountNumber.js`
 
-### `withdraw()`
+Generates a unique 8-digit account number.
 
-Removes money from the account if there are sufficient funds.
+The function uses `includes()` to check whether the generated number already exists.
 
-### `checkBalance()`
+### `newSortCode.js`
 
-Displays the current account balance in the console.
+Generates a unique 6-digit Sort Code and formats it as:
 
-## Example
+```text
+12-34-56
+```
 
-Three bank accounts are created in `index.js`:
+### `birthDate.js`
+
+Sets the allowed date of birth range.
+
+The customer must be at least 10 years old and no more than 100 years old.
+
+### `refreshSelection.js`
+
+Refreshes all account `<select>` elements after an account is created or deleted.
+
+### `accountDisplay.js`
+
+Displays account information and creates the controls for:
+
+* Deposit
+* Withdraw
+* Check Balance
+* Delete Account
+
+### `deleteAccount.js`
+
+Removes the selected account from the `accountsArray` and refreshes the account selection elements.
+
+## Account Management
+
+All created accounts are stored in an array:
 
 ```js
-const account1 = new bankAccount(127624, "John Doe", 100);
-const account2 = new bankAccount(524679, "Anna Smith", 0);
-const account3 = new bankAccount(435128, "Michael Johnson", 50);
+let accountsArray = [];
 ```
 
-The project then demonstrates depositing, withdrawing, and checking an account balance.
+When a new account is created:
+
+```js
+accountsArray.push(account);
+```
+
+When an account is deleted:
+
+```js
+const index = accountsArray.indexOf(item);
+
+accountsArray.splice(index, 1);
+```
 
 ## How to Run
 
-1. Clone or download the repository.
-2. Open the project in VS Code.
-3. Open `index.html` in a browser using a local development server such as **Live Server**.
-4. Open the browser Developer Tools.
-5. Go to the **Console** tab to see the results.
+1. Clone the repository:
 
-## Purpose
+```bash
+git clone https://github.com/alkajuk-eng/Banking-System.git
+```
 
-The main purpose of this project is to practise object-oriented programming concepts in JavaScript and understand how classes, constructors, methods, and ES modules work together.
+2. Open the project in Visual Studio Code.
+
+3. Open `index.html` in a browser.
+
+For the best development experience, you can use the **Live Server** extension in Visual Studio Code.
+
+## Learning Goals
+
+This project was created as a practical JavaScript learning project.
+
+The main goals are to practise:
+
+* Classes and objects
+* Constructors
+* Methods
+* ES6 modules
+* `import` and `export`
+* Arrays
+* `filter()`
+* `includes()`
+* `indexOf()`
+* `splice()`
+* `forEach()`
+* Arrow functions
+* DOM manipulation
+* Event listeners
+* Form handling
+* Dynamic HTML elements
+
+## Future Improvements
+
+Possible future improvements include:
+
+* Add local storage
+* Add transaction history
+* Add account login
+* Add account validation
+* Improve error messages
+* Add transfer functionality
+* Add a transaction statement
+* Improve responsive design
 
 ## Author
 
-Igors
+Created as a JavaScript learning project by **Igors Kozlovs**.
+
+```
+```
